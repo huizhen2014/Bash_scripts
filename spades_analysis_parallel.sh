@@ -13,7 +13,6 @@ for file in $(find $(pwd) -name "*.fq.gz")
 	    count=0
 	    out=${file##*/}
 	    out=${out%%_*}
-            ## ${read1},${read2},${out}_spades_out, which are printed quickly, would not take the job process
 	    echo "echo ${read1},${read2},${out}_spades_output" >> jobs.sh
 	    echo "spades.py -1 ${read1} -2 ${read2} -o ${out}_spades_output --careful -t 4 -k 21,33,55,77,99,127 1>${out}_spades.log 2>&1" >> jobs.sh
 	    read1=""
@@ -21,7 +20,6 @@ for file in $(find $(pwd) -name "*.fq.gz")
 	    fi
      done
 
-##parallel execute 6 processes a time
-##since echo the executed information quickly, it will execute 6 assembly jobs
+##parallel execute all processes in 6 times
 cat jobs.sh | parallel -j 6
 
