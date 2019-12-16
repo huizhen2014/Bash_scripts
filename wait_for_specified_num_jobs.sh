@@ -9,9 +9,9 @@ count=0
 
 for name in $(seq 1 15)
     do
-	echo $name & count=$((count + 1))
+	echo $name & count=$((${count} + 1))
 
-	if [ $((count % 4)) -eq 0 ];then
+	if [ $((${count} % 4)) -eq 0 ];then
 	    wait
 	    echo $?
 	    count=0
